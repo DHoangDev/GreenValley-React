@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Router, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import MainTemplate from './Pages/MainTemplate/MainTemplate';
+import LoginTemPlate from './Pages/LoginTemplate/LoginTemplate';
+import AdminTemplate from './Pages/AdminTemplate/AdminTemplate';
+import Error from './Pages/Error/Error';
 
-export default App;
+export const history = createBrowserHistory(); //{forceRefresh:true}
+export default class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Router history={history}>
+          <Switch>
+            <MainTemplate exact path="/" component={Home} />
+            <MainTemplate exact path="/Home" component={Home} />
+            <MainTemplate exact path="/Product" component={Product} />
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
+}
